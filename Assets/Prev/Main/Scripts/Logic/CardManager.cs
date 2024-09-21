@@ -24,7 +24,6 @@ public class CardManager : MonoBehaviour
     public List<GameObject> all = new();
     List<GameObject> gameObjects;
 
-    // Reference to the UI panel
     public GameObject gameOverPanel;
 
     void Awake()
@@ -94,6 +93,7 @@ public class CardManager : MonoBehaviour
             {
                 Destroy(card.gameObject);
                 dd.text = "Cards match!";
+                //OnCardMatch?.Invoke(); Didnt had time to properly imoplement,
             }
             selectedCards.Clear();
         }
@@ -102,10 +102,7 @@ public class CardManager : MonoBehaviour
             // Cards don't match
             Debug.Log("Cards don't match!");
             dd.text = "Cards don't match!";
-            foreach (GameObject card in cards)
-            {
-                
-            }
+            //OnCardFail?.Invoke(); Didnt had time to properly imoplement,
 
             selectedCards.Clear();
             foreach (GameObject go in gameObjects)

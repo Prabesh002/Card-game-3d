@@ -21,17 +21,17 @@ public class CardInstantiateManager : MonoBehaviour
         List<Card> cardsToSpawn = CardManager.cardManager.allCards;
         Shuffle(cardsToSpawn);
         
-        // Create a list to hold two pairs of each card
+        
         List<Card> cardsToSpawnWithPairs = new List<Card>();
         foreach (Card card in cardsToSpawn)
         {
-            cardsToSpawnWithPairs.Add(card);  // First instance
-            cardsToSpawnWithPairs.Add(card);  // Second instance (for the pair)
+            cardsToSpawnWithPairs.Add(card);  
+            cardsToSpawnWithPairs.Add(card);  
         }
 
-        Shuffle(cardsToSpawnWithPairs);  // Shuffle the pairs
+        Shuffle(cardsToSpawnWithPairs); 
 
-        // Instantiate all cards
+        
         for (int i = 0; i < cardsToSpawnWithPairs.Count; i++)
         {
             int randomIndex = GetEmptyPosition();
@@ -57,11 +57,11 @@ public class CardInstantiateManager : MonoBehaviour
             }
 
             cardObject.transform.DOMove(spawnPosition.position, 1f).SetEase(Ease.InOutBack);
-            instantiatedCards.Add(cardObject);  // Add instantiated card to list
+            instantiatedCards.Add(cardObject);  
         }
 
-        // Shuffle cards after instantiation
-        Invoke("ShuffleCardsAfterSpawn", 1.5f);  // Delay to ensure all cards are placed
+       
+        Invoke("ShuffleCardsAfterSpawn", 1.5f); 
     }
 
     public void Shuffle(List<Card> cards)
@@ -91,7 +91,7 @@ public class CardInstantiateManager : MonoBehaviour
     public void ShuffleCardsAfterSpawn()
     {
           CardManager.cardManager.all = CardInstantiateManager.inst.instantiatedCards;
-        // Shuffle the cards between positions
+       
         List<int> availablePositions = new List<int>();
         for (int i = 0; i < spawnPositions.Count; i++)
         {
@@ -100,7 +100,7 @@ public class CardInstantiateManager : MonoBehaviour
 
         ShufflePositions(availablePositions);
 
-        // Move the instantiated cards to their new random positions
+       
         for (int i = 0; i < instantiatedCards.Count; i++)
         {
             int randomIndex = availablePositions[i];
@@ -108,7 +108,7 @@ public class CardInstantiateManager : MonoBehaviour
             instantiatedCards[i].transform.DOMove(newPosition.position, 1f).SetEase(Ease.InOutBack);
         }
 
-        // Clear used positions for future spawns
+      
         usedPositions.Clear();
     }
 
